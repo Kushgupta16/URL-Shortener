@@ -1,3 +1,18 @@
+<?php
+    if(isset($_GET['u'])){
+        include "php/config.php";
+        $u=mysqli_real_escape_string($conn, $_GET['u']);
+
+        $sql=mysqli_query($conn, "SELECT full_url FROM url WHERE shorten_url = '{$u}'");  // getting full url of short url from table
+        if(mysqli_num_rows($sql)>0){   //redirect user
+            $full_url = mysqli_fetch_assoc($sql);
+            header("Location:".$full_url['full_url']);
+        }
+    }
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +24,7 @@
 <body>
     <div class="wrapper">
         <form action="#" autocomplete="off">
-            <input type="text" placeholder="Enter or paste a long url" required>
+            <input type="text" name="full-url" placeholder="Enter or paste a long url" required>
             <i class="url-icon uil uil-link"></i>
             <button>Shorten</button> 
         </form>
@@ -30,54 +45,6 @@
                 <li>16</li>
                 <li><a href="#">Delete</a></li>
             </div>
-            <div class ="data">
-                <li><a href='#'>example.com/xyz234</a></li>
-                <li>www.google.com</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class ="data">
-                <li><a href='#'>example.com/xyz234</a></li>
-                <li>www.google.com</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class ="data">
-                <li><a href='#'>example.com/xyz234</a></li>
-                <li>www.google.com</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class ="data">
-                <li><a href='#'>example.com/xyz234</a></li>
-                <li>www.google.com</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class ="data">
-                <li><a href='#'>example.com/xyz234</a></li>
-                <li>www.google.com</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class ="data">
-                <li><a href='#'>example.com/xyz234</a></li>
-                <li>www.google.com</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class ="data">
-                <li><a href='#'>example.com/xyz234</a></li>
-                <li>www.google.com</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
-            <div class ="data">
-                <li><a href='#'>example.com/xyz234</a></li>
-                <li>www.google.com</li>
-                <li>16</li>
-                <li><a href="#">Delete</a></li>
-            </div>
         </div>
     </div>
 
@@ -85,8 +52,8 @@
     <div class="popup-box">
         <div class="info-box">Your link is ready</div>
         <form action="#">
-            <label>Edit The URL</label>
-            <input type="text" spellcheck="false" value="example.com/xyz234">
+            <label>Edit Your URL</label>
+            <input type="text" spellcheck="false" value="">
             <i class="copy-icon uil uil-copy-alt"></i>
             <button>Save</button>
         </form>
